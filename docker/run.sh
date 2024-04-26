@@ -42,6 +42,7 @@ RUN_COMMAND="docker run \
   -v$(pwd)/.etc/group:/etc/group \
   -v/media:/media \
   --gpus all \
+  --workdir /home/$(whoami)
   -it $IMAGE_NAME"
 echo -e "[run.sh]: \e[1;32mThe final run command is\n\e[0;35m$RUN_COMMAND\e[0m."
 $RUN_COMMAND
