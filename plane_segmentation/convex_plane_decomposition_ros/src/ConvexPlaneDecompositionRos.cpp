@@ -11,6 +11,8 @@
 #include "convex_plane_decomposition_ros/ParameterLoading.h"
 #include "convex_plane_decomposition_ros/RosVisualizations.h"
 
+#include <iostream>
+
 namespace convex_plane_decomposition {
 
 ConvexPlaneExtractionROS::ConvexPlaneExtractionROS(ros::NodeHandle& nodeHandle) : tfBuffer_(), tfListener_(tfBuffer_) {
@@ -164,6 +166,7 @@ void ConvexPlaneExtractionROS::callback(const grid_map_msgs::GridMap& message) {
 Eigen::Isometry3d ConvexPlaneExtractionROS::getTransformToTargetFrame(const std::string& sourceFrame, const ros::Time& time) {
   geometry_msgs::TransformStamped transformStamped;
   try {
+    std::cout << "Source : " << sourceFrame << ", Target : " << targetFrameId_ << std::endl;
     transformStamped = tfBuffer_.lookupTransform(targetFrameId_, sourceFrame, time);
   } catch (tf2::TransformException& ex) {
     ROS_ERROR("[ConvexPlaneExtractionROS] %s", ex.what());

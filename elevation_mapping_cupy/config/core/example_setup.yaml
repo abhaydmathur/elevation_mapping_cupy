@@ -12,30 +12,33 @@ image_channel_fusions:
   feat_.*: 'exponential'      # 'exponential' fusion is also used for any channel starting with 'feat_' Regular expressions can be used for channel names
 
 #### Subscribers ########
-#  pointcloud_sensor_name:
-#    topic_name: '/sensor/pointcloud_semantic'
-#    data_type:  pointcloud  # pointcloud or image
-#
-#  image_sensor_name:
-#    topic_name: '/camera/image_semantic'
-#    data_type:  image  # pointcloud or image
-#    camera_info_topic_name: '/camera/depth/camera_info'
-#    channel_info_topic_name: '/camera/channel_info'
-
-
 subscribers:
-  front_cam:
-    topic_name: '/camera/depth/points'
-    data_type: pointcloud
-  color_cam: # for color camera
-    topic_name: '/camera/rgb/image_raw'
-    camera_info_topic_name: '/camera/depth/camera_info'
-    data_type: image
-  semantic_cam: # for semantic images
-    topic_name: '/front_cam/semantic_image'
-    camera_info_topic_name: '/front_cam/camera/depth/camera_info_resized'
-    channel_info_topic_name: '/front_cam/channel_info'
-    data_type: image
+  pointcloud_sensor_name:
+    topic_name: '/ouster/points'
+    data_type:  pointcloud  # pointcloud or image
+  pointcloud_sensor_name_2:
+    topic_name: '/ouster/points2'
+    data_type:  pointcloud 
+# image_sensor_name:
+#   topic_name: '/zed2i/zed_node/rgb/image_rect_color'
+#   data_type:  image  # pointcloud or image
+#   camera_info_topic_name: '/zed2i/zed_node/rgb/camera_info'
+  #  channel_info_topic_name: '/camera/channel_info' # Maybe publish it ourselves?
+
+
+# subscribers:
+#   front_cam:
+#     topic_name: '/camera/depth/points'
+#     data_type: pointcloud
+#   color_cam: # for color camera
+#     topic_name: '/camera/rgb/image_raw'
+#     camera_info_topic_name: '/camera/depth/camera_info'
+#     data_type: image
+#   semantic_cam: # for semantic images
+#     topic_name: '/front_cam/semantic_image'
+#     camera_info_topic_name: '/front_cam/camera/depth/camera_info_resized'
+#     channel_info_topic_name: '/front_cam/channel_info'
+#     data_type: image
 
 #### Publishers ########
 # topic_name:
@@ -47,12 +50,16 @@ publishers:
   elevation_map_raw:
     layers: ['elevation', 'traversability', 'variance','rgb']
     basic_layers: ['elevation']
-    fps: 5.0
+    fps: 10.0
   elevation_map_recordable:
    layers: ['elevation', 'traversability']
    basic_layers: ['elevation', 'traversability']
-   fps: 2.0
+   fps: 10.0
   elevation_map_filter:
     layers: ['min_filter', 'smooth', 'inpaint', 'elevation']
     basic_layers: ['min_filter']
-    fps: 3.0
+    fps: 10.0
+  plugin_example: # Topic name
+    layers: [ 'elevation', 'example_layer', 'example_layer_large' ]
+    basic_layers: [ 'example_layer' ]
+    fps: 1.0        # The plugin is called with this fps.
