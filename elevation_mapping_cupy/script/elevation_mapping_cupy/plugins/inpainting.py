@@ -27,6 +27,8 @@ class Inpainting(PluginBase):
             self.method = cv.INPAINT_TELEA
         elif method == "ns":  # Navier-Stokes
             self.method = cv.INPAINT_NS
+        # elif method == "fsr_best":
+        #     self.method = cv.INPAINT_FSR_BEST
         else:  # default method
             self.method = cv.INPAINT_TELEA
 
@@ -50,6 +52,9 @@ class Inpainting(PluginBase):
         Returns:
             cupy._core.core.ndarray:
         """
+        # n1, n2 = elevation_map[0].shape
+        # elevation_map[2][:, 3*n2//4:] = 0
+        # elevation_map[2][:n1//2, :] = 0
         mask = cp.asnumpy((elevation_map[2] < 0.5).astype("uint8"))
         if (mask < 1).any():
             h = elevation_map[0]
@@ -61,3 +66,4 @@ class Inpainting(PluginBase):
             return cp.asarray(h_inpainted).astype(np.float64)
         else:
             return elevation_map[0]
+        # return elevation_map[0]
