@@ -57,7 +57,7 @@ class SmoothFilter(PluginBase):
             print("layer name {} was not found. Using elevation layer.".format(self.input_layer_name))
             h = elevation_map[0]
         hs1 = ndimage.uniform_filter(h, size=3)
-        hs1 = ndimage.uniform_filter(hs1, size=3)
+        # hs1 = ndimage.uniform_filter(hs1, size=3)
 
         # if self.mask_invalid:
         #     mask = cp.asnumpy((elevation_map[layer_names.index("is_valid")] < 0.5).astype("uint8"))
