@@ -46,3 +46,59 @@ example:                                      # Name of your filter
   extra_params:    
     input_layer_name: "smooth"                           # This params are passed to the plugin class on initialization.
     add_value: 2.0                            # Example param
+
+sobel:
+  type: "edge_detection"
+  enable: True
+  fill_nan: True
+  is_height_layer: True
+  layer_name: "sobel"
+  extra_params:
+    input_layer_name: "inpaint"
+    type: "sobel"
+
+prewitt:
+  type: "edge_detection"
+  enable: True
+  fill_nan: True
+  is_height_layer: True
+  layer_name: "prewitt"
+  extra_params:
+    input_layer_name: "inpaint"
+    type: "prewitt"
+
+laplace:
+  type: "edge_detection"
+  enable: True
+  fill_nan: True
+  is_height_layer: True
+  layer_name: "laplace"
+  extra_params:
+    input_layer_name: "inpaint"
+    type: "laplace"
+
+gaussian_laplace1:
+  type: "edge_detection"
+  enable: True
+  fill_nan: True
+  is_height_layer: True
+  layer_name: "gaussian_laplace1"
+  extra_params:
+    input_layer_name: "inpaint"
+    type: "gaussian_laplace"
+    sigma: 1
+
+gaussian_laplace3:
+  type: "edge_detection"
+  enable: True
+  fill_nan: True
+  is_height_layer: True
+  layer_name: "gaussian_laplace3"
+  extra_params:
+    input_layer_name: "inpaint"
+    type: "gaussian_laplace"
+    sigma: 3
+    
+
+
+

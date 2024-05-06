@@ -178,7 +178,7 @@ def add_points_kernel(
                           // continue;
                         }
                         else {
-                            T new_h = (map_h * v + z * map_v) / (map_v + v);
+                            T new_h = z; //(map_h * v + z * map_v) / (map_v + v);
                             T new_v = (map_v * v) / (map_v + v);
                             atomicAdd(&newmap[get_map_idx(idx, 0)], new_h);
                             atomicAdd(&newmap[get_map_idx(idx, 1)], new_v);

@@ -63,3 +63,8 @@ publishers:
     layers: [ 'elevation', 'example_layer', 'example_layer_large' ]
     basic_layers: [ 'example_layer' ]
     fps: 1.0        # The plugin is called with this fps.
+  edge_detection:
+    input_layer_name: 'smooth' 
+    layers: ['sobel', 'prewitt', 'elevation', 'smooth', 'inpaint', 'laplace', 'gaussian_laplace1', 'gaussian_laplace3']
+    basic_layers: ['sobel', 'prewitt', 'elevation', 'inpaint', 'smooth']
+    fps: 20.0
