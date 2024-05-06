@@ -21,13 +21,16 @@ class FeaturesPca(PluginBase):
     """
 
     def __init__(
-        self, cell_n: int = 100, process_layer_names: List[str] = [], **kwargs,
+        self,
+        cell_n: int = 100,
+        process_layer_names: List[str] = [],
+        **kwargs,
     ):
         super().__init__()
         self.process_layer_names = process_layer_names
 
     def get_layer_indices(self, layer_names: List[str]) -> List[int]:
-        """ Get the indices of the layers that are to be processed using regular expressions.
+        """Get the indices of the layers that are to be processed using regular expressions.
         Args:
             layer_names (List[str]): List of layer names.
         Returns:
@@ -35,7 +38,9 @@ class FeaturesPca(PluginBase):
         """
         indices = []
         for i, layer_name in enumerate(layer_names):
-            if any(re.match(pattern, layer_name) for pattern in self.process_layer_names):
+            if any(
+                re.match(pattern, layer_name) for pattern in self.process_layer_names
+            ):
                 indices.append(i)
         return indices
 
@@ -65,7 +70,8 @@ class FeaturesPca(PluginBase):
         # get indices of all layers that contain semantic features information
         data = []
         for m, layer_names in zip(
-            [elevation_map, plugin_layers, semantic_map], [layer_names, plugin_layer_names, semantic_layer_names]
+            [elevation_map, plugin_layers, semantic_map],
+            [layer_names, plugin_layer_names, semantic_layer_names],
         ):
             layer_indices = self.get_layer_indices(layer_names)
             if len(layer_indices) > 0:

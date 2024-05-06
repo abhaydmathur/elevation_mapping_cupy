@@ -19,7 +19,9 @@ class MinFilter(PluginBase):
         **kwargs ():
     """
 
-    def __init__(self, cell_n: int = 100, dilation_size: int = 5, iteration_n: int = 5, **kwargs):
+    def __init__(
+        self, cell_n: int = 100, dilation_size: int = 5, iteration_n: int = 5, **kwargs
+    ):
         super().__init__()
         self.iteration_n = iteration_n
         self.width = cell_n
@@ -114,5 +116,7 @@ class MinFilter(PluginBase):
             # If there's no more mask, break
             if (self.min_filtered_mask > 0.5).all():
                 break
-        min_filtered = cp.where(self.min_filtered_mask > 0.5, self.min_filtered.copy(), cp.nan)
+        min_filtered = cp.where(
+            self.min_filtered_mask > 0.5, self.min_filtered.copy(), cp.nan
+        )
         return min_filtered

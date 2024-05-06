@@ -20,7 +20,10 @@ class SemanticFilter(PluginBase):
     """
 
     def __init__(
-        self, cell_n: int = 100, classes: list = ["person", "grass"], **kwargs,
+        self,
+        cell_n: int = 100,
+        classes: list = ["person", "grass"],
+        **kwargs,
     ):
         super().__init__()
         self.indices = []
@@ -77,7 +80,7 @@ class SemanticFilter(PluginBase):
         return cp.asarray(rgb_arr)
 
     def get_layer_indices(self, layer_names: List[str]) -> List[int]:
-        """ Get the indices of the layers that are to be processed using regular expressions.
+        """Get the indices of the layers that are to be processed using regular expressions.
         Args:
             layer_names (List[str]): List of layer names.
         Returns:
@@ -117,7 +120,8 @@ class SemanticFilter(PluginBase):
         # get indices of all layers that contain semantic class information
         data = []
         for m, layer_names in zip(
-            [elevation_map, plugin_layers, semantic_map], [layer_names, plugin_layer_names, semantic_layer_names]
+            [elevation_map, plugin_layers, semantic_map],
+            [layer_names, plugin_layer_names, semantic_layer_names],
         ):
             layer_indices = self.get_layer_indices(layer_names)
             if len(layer_indices) > 0:

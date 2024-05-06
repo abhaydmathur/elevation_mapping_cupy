@@ -5,14 +5,15 @@ import cupyx.scipy.ndimage as ndimage
 
 
 class MaskInvalid(PluginBase):
-    def __init__(self,  input_layer_name = "smooth", add_value:float=1.0, **kwargs):
+    def __init__(self, input_layer_name="smooth", add_value: float = 1.0, **kwargs):
         super().__init__()
         self.input_layer_name = "smooth"
         self.add_value = float(add_value)
         self.default_layer_name = "smooth"
         self.flag = 1
 
-    def __call__(self,
+    def __call__(
+        self,
         elevation_map: cp.ndarray,
         layer_names: List[str],
         plugin_layers: cp.ndarray,
@@ -20,7 +21,7 @@ class MaskInvalid(PluginBase):
         semantic_map: cp.ndarray,
         semantic_layer_names: List[str],
         *args
-    )->cp.ndarray:
+    ) -> cp.ndarray:
         """
         Masks invalid data out of smoothened grid map
         """

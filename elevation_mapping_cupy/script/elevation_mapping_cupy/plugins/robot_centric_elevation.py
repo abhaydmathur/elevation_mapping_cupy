@@ -20,7 +20,12 @@ class RobotCentricElevation(PluginBase):
     """
 
     def __init__(
-        self, cell_n: int = 100, resolution: float = 0.05, threshold: float = 0.4, use_threshold: bool = 0, **kwargs
+        self,
+        cell_n: int = 100,
+        resolution: float = 0.05,
+        threshold: float = 0.4,
+        use_threshold: bool = 0,
+        **kwargs,
     ):
         super().__init__()
         self.width = cell_n
@@ -116,6 +121,10 @@ class RobotCentricElevation(PluginBase):
         # check that transform is a ndarray
         self.min_filtered = elevation_map[0].copy()
         self.base_elevation_kernel(
-            elevation_map[0], elevation_map[2], rotation, self.min_filtered, size=(self.width * self.height),
+            elevation_map[0],
+            elevation_map[2],
+            rotation,
+            self.min_filtered,
+            size=(self.width * self.height),
         )
         return self.min_filtered

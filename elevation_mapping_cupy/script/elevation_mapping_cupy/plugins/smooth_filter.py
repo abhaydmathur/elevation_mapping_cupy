@@ -21,7 +21,13 @@ class SmoothFilter(PluginBase):
         **kwargs: Additional keyword arguments.
     """
 
-    def __init__(self, cell_n: int = 100, input_layer_name: str = "elevation", mask_invalid = True, **kwargs):
+    def __init__(
+        self,
+        cell_n: int = 100,
+        input_layer_name: str = "elevation",
+        mask_invalid=True,
+        **kwargs,
+    ):
         super().__init__()
         self.input_layer_name = input_layer_name
         self.mask_invalid = mask_invalid
@@ -46,7 +52,7 @@ class SmoothFilter(PluginBase):
         Returns:
             cupy._core.core.ndarray:
         """
-        
+
         if self.input_layer_name in layer_names:
             idx = layer_names.index(self.input_layer_name)
             h = elevation_map[idx]
@@ -54,13 +60,17 @@ class SmoothFilter(PluginBase):
             idx = plugin_layer_names.index(self.input_layer_name)
             h = plugin_layers[idx]
         else:
-            print("layer name {} was not found. Using elevation layer.".format(self.input_layer_name))
+            print(
+                "layer name {} was not found. Using elevation layer.".format(
+                    self.input_layer_name
+                )
+            )
             h = elevation_map[0]
         hs1 = ndimage.uniform_filter(h, size=3)
         # hs1 = ndimage.uniform_filter(hs1, size=3)
 
         # if self.mask_invalid:
         #     mask = cp.asnumpy((elevation_map[layer_names.index("is_valid")] < 0.5).astype("uint8"))
-            # hs1[:hs1.shape[0]//2 ,:] = cp.nan
+        # hs1[:hs1.shape[0]//2 ,:] = cp.nan
 
         return hs1

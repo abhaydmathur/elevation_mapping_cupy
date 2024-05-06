@@ -65,7 +65,13 @@ class MaxLayerFilter(PluginBase):
         layers = []
         for it, name in enumerate(self.layers):
             layer = self.get_layer_data(
-                elevation_map, layer_names, plugin_layers, plugin_layer_names, semantic_map, semantic_layer_names, name
+                elevation_map,
+                layer_names,
+                plugin_layers,
+                plugin_layer_names,
+                semantic_map,
+                semantic_layer_names,
+                name,
             )
             if layer is None:
                 continue
