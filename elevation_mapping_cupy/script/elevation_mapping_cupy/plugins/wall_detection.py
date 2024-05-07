@@ -5,7 +5,7 @@ import cupyx.scipy.ndimage as ndimage
 
 
 class EdgeDetection(PluginBase):
-    def __init__(self, input_layer_name, algo, sigma=1, min_h = 0.50, **kwargs):
+    def __init__(self, input_layer_name, algo, sigma=1,**kwargs):
         super().__init__()
         self.input_layer_name = input_layer_name
         self.possible_types = ['sobel', 'prewitt', 'laplace', 'gaussian_laplace']
@@ -13,7 +13,6 @@ class EdgeDetection(PluginBase):
         self.flag = 1
         self.sigma = sigma
         self.algo = algo
-        self.min_h = min_h
         self.thresh = 0.1
 
     def __call__(
@@ -51,15 +50,15 @@ class EdgeDetection(PluginBase):
         elif self.algo.lower() == "laplace":
             hs1 = cp.absolute(ndimage.laplace(h))
             hs1 /= cp.max(hs1)
-            hs1 = (hs1>=self.thresh) * (h>=self.min_h)
+            hs1 = hs1>=self.thresh
             return hs1
         elif self.algo.lower() == "gaussian_laplace":
             hs1 = cp.absolute(ndimage.gaussian_laplace(h, self.sigma))
             hs1 /= cp.max(hs1)
-            hs1 = (hs1>=self.thresh) * (h>=self.min_h)
+            hs1 = hs1>=self.thresh
             return hs1
     
         hs1 = cp.sqrt(x**2 + y**2)
         hs1 /= cp.max(hs1)
-        hs1 = (hs1>=self.thresh) * (h>=self.min_h)
+        hs1 = hs1>=self.thresh
         return hs1

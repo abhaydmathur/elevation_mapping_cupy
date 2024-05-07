@@ -54,8 +54,8 @@ sobel:
   is_height_layer: True
   layer_name: "sobel"
   extra_params:
-    input_layer_name: "inpaint"
-    type: "sobel"
+    input_layer_name: "elevation"
+    algo: "sobel"
 
 prewitt:
   type: "edge_detection"
@@ -64,8 +64,8 @@ prewitt:
   is_height_layer: True
   layer_name: "prewitt"
   extra_params:
-    input_layer_name: "inpaint"
-    type: "prewitt"
+    input_layer_name: "elevation"
+    algo: "prewitt"
 
 laplace:
   type: "edge_detection"
@@ -74,8 +74,8 @@ laplace:
   is_height_layer: True
   layer_name: "laplace"
   extra_params:
-    input_layer_name: "inpaint"
-    type: "laplace"
+    input_layer_name: "elevation"
+    algo: "laplace"
 
 gaussian_laplace1:
   type: "edge_detection"
@@ -84,8 +84,8 @@ gaussian_laplace1:
   is_height_layer: True
   layer_name: "gaussian_laplace1"
   extra_params:
-    input_layer_name: "inpaint"
-    type: "gaussian_laplace"
+    input_layer_name: "elevation"
+    algo: "gaussian_laplace"
     sigma: 1
 
 gaussian_laplace3:
@@ -95,8 +95,8 @@ gaussian_laplace3:
   is_height_layer: True
   layer_name: "gaussian_laplace3"
   extra_params:
-    input_layer_name: "inpaint"
-    type: "gaussian_laplace"
+    input_layer_name: "elevation"
+    algo: "gaussian_laplace"
     sigma: 3
     
 
